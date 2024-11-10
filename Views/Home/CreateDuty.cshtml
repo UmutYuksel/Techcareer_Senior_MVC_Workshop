@@ -1,0 +1,28 @@
+@model EfCore.Models.Duty
+
+@{
+    ViewData["Title"] = "Görev Ekle";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form method="post">
+    <div class="form-group">
+        <label for="Title">Görev Başlığı</label>
+        <input type="text" class="form-control" id="Title" name="Title" required />
+    </div>
+    <div class="form-group">
+        <label for="Description">Açıklama</label>
+        <textarea class="form-control" id="Description" name="Description" required></textarea>
+    </div>
+    <div class="form-group">
+        <label for="UserId">Kullanıcı</label>
+        <select class="form-control" id="UserId" name="UserId" required>
+            @foreach (var user in ViewData["Users"] as SelectList)
+            {
+                <option value="@user.Value">@user.Text</option>
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Ekle</button>
+</form>

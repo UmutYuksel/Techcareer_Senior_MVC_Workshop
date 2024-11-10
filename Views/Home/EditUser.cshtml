@@ -1,0 +1,18 @@
+@model EfCore.Models.User
+
+@{
+    ViewData["Title"] = "Kullanıcı Düzenle";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form method="post" asp-action="EditUser" asp-route-id="@Model.UserId">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="@Model.UserId" />
+    <div class="form-group">
+        <label for="Name">Adı</label>
+        <input type="text" class="form-control" id="Name" name="Name" value="@Model.Name" required />
+    </div>
+    <br>
+    <button type="submit" class="btn btn-primary">Güncelle</button>
+</form>

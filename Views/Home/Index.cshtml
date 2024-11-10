@@ -1,0 +1,55 @@
+﻿@model EfCore.ViewModels.HomeIndexViewModel
+
+<h2>Kullanıcılar</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Ad</th>
+            <th>Görev Sayısı</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model.Users)
+        {
+            <tr>
+                <td>@user.Name</td>
+                <td>@user.Duties.Count()</td>
+                <td>
+                    <a href="@Url.Action("EditUser", "Home", new { id = user.UserId })" class="btn btn-warning btn-sm">Düzenle</a>
+                    <a href="@Url.Action("DeleteUser", "Home", new { id = user.UserId })" class="btn btn-danger btn-sm">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a href="@Url.Action("CreateUser", "Home")" class="btn btn-primary">Yeni Kullanıcı Ekle</a>
+
+<h2 class="mt-5">Görevler</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Başlık</th>
+            <th>Açıklama</th>
+            <th>Kullanıcı</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var duty in Model.Duties)
+        {
+            <tr>
+                <td>@duty.Title</td>
+                <td>@duty.Description</td>
+                <td>@duty.User?.Name</td>
+                <td>
+                    <a href="@Url.Action("EditDuty", "Home", new { id = duty.DutyId })" class="btn btn-warning btn-sm">Düzenle</a>
+                    <a href="@Url.Action("DeleteDuty", "Home", new { id = duty.DutyId })" class="btn btn-danger btn-sm">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a href="@Url.Action("CreateDuty", "Home")" class="btn btn-primary">Yeni Görev Ekle</a>
